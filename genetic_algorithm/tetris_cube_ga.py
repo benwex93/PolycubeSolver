@@ -1,21 +1,4 @@
 from shape_drawer import draw_shape
-# swaps = ((0,1,2),(0,2,1),(1,0,2),(1,2,0),(2,1,0),(2,0,1))
-# negations = ((1,1,1),(-1,1,1),(1,-1,1),(1,1,-1))
-# swap = swaps[0]
-# negate = negations[3]
-
-# for i, (coords, color) in enumerate(cubes):
-
-# 	x = coords[swap[0]]
-# 	y = coords[swap[1]]
-# 	z = coords[swap[2]]
-
-# 	x *= negate[0]
-# 	y *= negate[1]
-# 	z *= negate[2]
-
-# 	cubes[i] = ((x,y,z), color)
-#draw_shape(cubes)
 
 
 from common import FixedEndCondition, FitnessDoneEndCondition, TopNReporter, PlotFitness, \
