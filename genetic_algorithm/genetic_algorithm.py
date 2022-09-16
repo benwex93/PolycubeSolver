@@ -36,15 +36,15 @@ class GeneticAlgorithm:
 		parent1, parent2 = self.selector.select(pop=pop, pop_fitness=pop_fitness, first=True)
 		next_pop.insert(parent1)
 		next_pop.insert(parent2)
- 		offspring1, offspring2 = self.crossover.cross(parent1=parent1, parent2=parent2)
- 		offspring1 = self.mutator.mutate(offspring1)
- 		offspring2 = self.mutator.mutate(offspring2)
+		offspring1, offspring2 = self.crossover.cross(parent1=parent1, parent2=parent2)
+		offspring1 = self.mutator.mutate(offspring1)
+		offspring2 = self.mutator.mutate(offspring2)
  		
 		while not next_pop.is_full():
 			parent1, parent2 = self.selector.select(pop=pop, pop_fitness=pop_fitness)
-	 		offspring1, offspring2 = self.crossover.cross(parent1=parent1, parent2=parent2)
-	 		offspring1 = self.mutator.mutate(offspring1)
-	 		offspring2 = self.mutator.mutate(offspring2)
+			offspring1, offspring2 = self.crossover.cross(parent1=parent1, parent2=parent2)
+			offspring1 = self.mutator.mutate(offspring1)
+			offspring2 = self.mutator.mutate(offspring2)
 			next_pop.insert(offspring1)
 			next_pop.insert(offspring2)
 		return next_pop

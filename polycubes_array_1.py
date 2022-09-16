@@ -97,6 +97,10 @@ s2long = ((np.array([[[True, True, True, True, True],
         [False, False, False, False, False],
         [False, False, False, False, False]]]),'b'))
 
+# 2x3x4 
+# 6x ----
+shapes234 = [s2 for _ in range(6)]
+
 # 2x4x4 
 # #4x ---__ 2x ----
 shapes244 = [s1 for _ in range(4)]
@@ -121,6 +125,8 @@ shapes555 = [s1long for _ in range(25)]
 # shapes = [s for _ in range(25)]
 
 colors = ('r','b','y')
+
+shapes234 = [(s[0], colors[i % len(colors)]) for i, s in enumerate(shapes234)]
 
 shapes244 = [(s[0], colors[i % len(colors)]) for i, s in enumerate(shapes244)]
 

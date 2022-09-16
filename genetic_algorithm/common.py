@@ -20,6 +20,7 @@ class TopNReporter:
 	def __init__(self, top_n_to_report):
 		self.top_n_to_report = top_n_to_report
 		self.start = time.time()
+		self.best_global = 0
 
 	def report(self, pop, pop_fitness, iteration):
 		print('iteration: ', iteration)
@@ -29,6 +30,9 @@ class TopNReporter:
 		print('best fitness: ', max_val)
 		pop.get_pop_list()[pop_fitness.index(max_val)].print_chromosome()
 		print('avg fitness: ', sum(pop_fitness) / float(len(pop_fitness)))
+		if max_val > self.best_global:
+			self.best_global = max_val
+		print('best global fitness: ', self.best_global)
 		print('time since start', time.time() - self.start)
 import matplotlib.pyplot as plt
 import numpy as np

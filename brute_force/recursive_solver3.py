@@ -1,12 +1,6 @@
-# from polycubes_array import s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12
-
-from common.shape_transformer import coordinates2matrix, matrix2coordinates, transform_shape
 import numpy as np
 from common.shape_drawer import draw_shape, draw_shapes, draw_shapes_spread, animate_shapes_spread, draw_shapes_one_each
 from common.coverage_transformer import CoverageTransformer
-
-import itertools
-import random
 
 import time
 start_time = time.time()

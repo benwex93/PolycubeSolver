@@ -16,7 +16,7 @@ start_time = time.time()
 
 
 
-class RecursiveSolver():
+class RecursiveSolver2():
 
     def __init__(self, same_shapes):
 
