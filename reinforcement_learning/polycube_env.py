@@ -1,27 +1,52 @@
 import gym
 from gym import spaces
+from common.coverage_transformer import CoverageTransformer
+from gym.spaces import MultiDiscrete, MultiBinary
+import numpy as np
 
 class PolyCubeEnv(gym.Env):
-	"""Custom Environment that follows gym interface"""
-	metadata = {'render.modes': ['human']}
 
-	def __init__(self, arg1, arg2, ...):
-		super(CustomEnv, self).__init__()
-		# Define action and observation space
-		# They must be gym.spaces objects
-		# Example when using discrete actions:
-		self.action_space = spaces.Discrete(N_DISCRETE_ACTIONS)
-		# Example for using image as input:
-		self.observation_space = spaces.Box(low=0, high=255, shape=
-		(HEIGHT, WIDTH, N_CHANNELS), dtype=np.uint8)
-		self.state = None
-	def step(self, action):
-		# Execute one time step within the environment
-		# action is tuple of len(shapes_ls) with actions being -1, 0, 1 for go up, stay, or down shapes list which loops back on self
-		for s in action:
+	def __init__(self, cube_open_vertices, problem_matrices, shapes_names):
+		self.cube_spaces = cube_open_vertices.shape[0] * cube_open_vertices.shape[1] * cube_open_vertices.shape[2]
+		self.shapes_names = shapes_names
+		self.problem_matrices = problem_matrices
+
+		self.action_space = gym.spaces.MultiDiscrete([3 for _ in range(len(self.shapes_names))])
+		self.action_space.sample()
+
+
+
+		self.action_dims = [problem_matrices[shape_name].shape[0] for shape_name in self.shapes_names]
+		self.observation_space = MultiDiscrete(self.action_dims)
+
+
+		#state is (num objects, x*y*z)
+		# self.observation_space = MultiBinary([len(self.shapes_names), problem_matrices[self.shapes_names[0]].shape[1]])
+
+	def step(self, action_list):
+		for i, action in enumerate(action_list):
+			self.state_idxs[i] += (action-1)
+			self.state_idxs[i] %= self.action_dims[i]
+
+		#get reward finding used spaces
+		state = [self.problem_matrices[shape_name][idx] for shape_name, idx in zip(self.shapes_names, self.state_idxs)]
+
+		taken_shapes = []
+		for shape, idx in zip(self.shapes_names, self.state_idxs):
+			taken_shapes.append(self.problem_matrices[shape][idx])
+		reward = np.sum(np.sum(np.array(taken_shapes), axis=0) == 1)
+
+		done = 0
+		if reward == self.cube_spaces:
+			done = 1
+		info = None
+
+		return state, reward, done, info 
 
 	def reset(self):
-		self.state = rand index in problem_matrices
-		# Reset the state of the environment to an initial state
-	def render(self, mode='human', close=False):
-		# Render the environment to the screen
+		self.state_idxs = self.observation_space.sample()
+		state = [self.problem_matrices[shape_name][idx] for shape_name, idx in zip(self.shapes_names, self.state_idxs)]
+		return state
+	# def render(self, mode='human', close=False):
+	# 	pass
+	# 	# Render the environment to the screen

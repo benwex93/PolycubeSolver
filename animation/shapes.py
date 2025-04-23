@@ -199,8 +199,8 @@ class AssemblePieces(ThreeDScene):
                 face.set_stroke(BLACK, width=2)  # Black outline
             return cube
 
-        num_blocks = 3
-        # num_blocks = len(shapes_ls)
+        # num_blocks = 3
+        num_blocks = len(shapes_ls)
 # 
         loop_num = 3
         offset_gain = 5
@@ -229,12 +229,12 @@ class AssemblePieces(ThreeDScene):
 
 
         # self.move_camera(zoom=0.3)
-        self.move_camera(zoom=0.4)
+        self.move_camera(zoom=0.37)
         self.move_camera(phi=45 * DEGREES,theta=-25 * DEGREES)
         #snake_cube
         # self.move_camera(frame_center=(0.5,-2,2))
         #tetris
-        self.move_camera(frame_center=(-0.1,-2,2))
+        self.move_camera(frame_center=(-0.225,-2,2))
         # self.play(GrowFromCenter(shapes_gr))
 
 

@@ -113,6 +113,7 @@ class CoverageTransformer():
 
         if print_shape_name:
             origins = {}
+            # origins = []
         else:
             origins = []
         # shapes_dict_swap = {v: k for k, v in self.shapes_dict.items()}
@@ -139,7 +140,8 @@ class CoverageTransformer():
                     origins.append((shape_coords, self.shapes_colors_dict[shape_name]))
             else:
                 colors = ('r','b','y')
-                origins.append((shape_coords, colors[color_i % len(colors)]))
+                # breakpoint()
+                origins[f's{color_i + 1}']=(shape_coords, colors[color_i % len(colors)])
 
         return origins
 
